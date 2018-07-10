@@ -1,14 +1,51 @@
+<!-- -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="home">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
-      Ionic Blank
+      <strong>Model Management</strong>
     </ion-title>
+    <ion-buttons end>
+      <button ion-button tappable (click)="presentNotifications($event)">
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <button ion-button tappable (click)="goToAccount()">
+        <ion-icon name="cog"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding class="animated fadeIn common-bg">
+
+  <ion-card no-margin margin-bottom class="full-width">
+    <ion-item tappable  class="border-bottom">
+      <!-- <ion-icon name="search" color="primary" item-left></ion-icon>
+      <span>{{ search.name }}</span> -->
+      <ion-searchbar  [(ngModel)]="keywords"  placeholder="search with name first letter" class="address"></ion-searchbar>
+    </ion-item>
+    <ion-item>
+      <!-- <ion-icon name="md-calendar" color="primary" item-left></ion-icon>
+      <ion-datetime class="no-pl" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="search.date"></ion-datetime> -->
+      <ion-searchbar  [(ngModel)]="city"  placeholder="City" class="address"></ion-searchbar>
+    </ion-item>
+    <ion-item>
+      <ion-label>Industry Members</ion-label>
+      <ion-select [(ngModel)]="mem">
+        <ion-option value="1">Photographers</ion-option>
+        <ion-option value="2">Model Agencies</ion-option>
+        <ion-option value="3">Fashion Stylists</ion-option>
+        <ion-option value="4">Hair and Makeup Artists</ion-option>
+        <ion-option value="5">Industry Professionals</ion-option>
+        <ion-option value="6">Models</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
+  <button ion-button icon-start block no-margin color="primary" class="round" tappable (click)="doSearch()">
+    <ion-icon name="search"></ion-icon> Search
+  </button>
+
 </ion-content>

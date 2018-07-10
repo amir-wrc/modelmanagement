@@ -1,0 +1,109 @@
+<!-- -->
+<ion-header>
+
+  <ion-navbar  color="primary">
+    <ion-title>
+      <span ion-text>{{ trip.fname }} {{ trip.lname }}</span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="common-bg">
+  <!--slides-->
+  <ion-slides class="to-top" pager>
+    <ion-slide *ngFor="let image of trip.images">
+      <img [src]="image" alt="">
+    </ion-slide>
+  </ion-slides>
+
+  <!--services-->
+  <ion-grid class="border-bottom dark-bg">
+    <ion-row>
+      <ion-col text-center>
+        <div class="text-sm">
+          <div>
+              <ion-icon name="heart-outline"></ion-icon>
+            <!-- <ion-icon name="time" class="text-white"></ion-icon> -->
+            <span ion-text color="light">4</span>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <span ion-text color="light">2</span>
+            <!-- <ion-icon name="list-box" margin-left class="text-white" *ngIf="trip.electric_voucher"></ion-icon>
+            <span ion-text color="light" *ngIf="trip.electric_voucher">Electronic voucher</span> -->
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--trust-->
+  <div class="border-bottom" padding>
+    <span ion-text color="dark" class="bold">TRUST</span>
+    <ul class="highlight">
+      <li *ngFor="let highlight of trip.trust">
+        <ion-icon name="checkmark" class="text-green"></ion-icon>
+        <span ion-text color="primary">{{ highlight }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <!--booking form-->
+  <div class="booking-form card round" margin *ngIf="trip.videos!=''">
+    <div class="border-bottom" padding>
+      <h5>{{ trip.sub_name }}</h5>
+
+      <!--choose guest-->
+      <ion-grid class="filters" no-padding margin-top >
+        <ion-row>
+          <video width="280" height="240" controls>
+            <source src="{{trip.videos}}" type="video/mp4">
+            <!-- <source src="movie.ogg" type="video/ogg"> -->
+          Your browser does not support the video tag.
+          </video> 
+        </ion-row>
+        
+      </ion-grid>
+    </div>
+    <!-- <div padding class="form-bottom">
+
+      
+      <button ion-button class="pull-right" color="secondary" tappable (click)="checkout()">Book Now {{ adults * trip.price_adult +
+        children * trip.price_child | currency:'USD':true }}
+      </button>
+      <div class="clear"></div>
+    </div> -->
+  </div>
+
+  <div class="border-bottom" padding>
+      <span ion-text color="primary" class="bold">INFORMATION</span>
+      <ul class="highlight">
+          <li *ngFor="let highlight of trip.info">
+            <!-- <ion-icon name="checkmark" class="text-green"></ion-icon> -->
+            <span ion-text color="primary">{{ highlight }}</span>
+          </li>
+        </ul>
+    </div>
+
+    <div class="border-bottom" padding>
+        <span ion-text color="dark" class="bold">DISCIPLINE</span>
+        <ul class="highlight">
+          <li *ngFor="let highlight of trip.discipline">
+            <!-- <ion-icon name="checkmark" class="text-green"></ion-icon> -->
+            <span ion-text color="primary">{{ highlight }}</span>
+          </li>
+        </ul>
+      </div>
+
+  <!--description-->
+  <div class="border-bottom" padding>
+    <span ion-text color="primary" class="bold">DESCRIPTION</span>
+    <p ion-text>{{ trip.description }}</p>
+  </div>
+
+  <!--address-->
+  <div class="border-bottom" padding>
+    <span ion-text color="primary" class="bold">LOCATION</span>
+    <p ion-text>{{ trip.location }}</p>
+  </div>
+</ion-content>
