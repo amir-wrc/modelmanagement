@@ -1,9 +1,9 @@
 import {Component} from "@angular/core";
-import {NavController, NavParams} from "ionic-angular";
+import {NavController, NavParams,IonicPage} from "ionic-angular";
 import {Storage} from '@ionic/storage';
 
 // import {SearchCarsPage} from "../search-cars/search-cars";
-
+@IonicPage()
 @Component({
   selector: 'page-search-location',
   templateUrl: 'search-location.html'

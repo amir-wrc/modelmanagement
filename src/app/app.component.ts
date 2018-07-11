@@ -1,15 +1,9 @@
 import { Component, ViewChild } from "@angular/core";
 import { Platform, Nav,Events  } from "ionic-angular";
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
-
-import { HomePage } from "../pages/home/home";
-import { LoginPage } from "../pages/login/login";
-import { LocalWeatherPage } from "../pages/local-weather/local-weather";
 import { Http, Headers, RequestOptions } from '@angular/http';
-
 import {Storage} from '@ionic/storage';
 
 export interface MenuItem {
@@ -25,10 +19,10 @@ export interface MenuItem {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage:any = '';
   alldata:any={};
   appMenuItems: Array<MenuItem>;
-  
+  storage_det:any = [];
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
@@ -42,16 +36,24 @@ export class MyApp {
     this.initializeApp();
 
     this.appMenuItems = [
-      {title: 'Home', component: HomePage, icon: 'home'},
+      {title: 'Home', component: 'HomePage', icon: 'home'},
       //{title: 'Local Weather', component: LocalWeatherPage, icon: 'partly-sunny'}
     ];
     let id:any =  this.storage.get('id');
     //console.log(email);
-    this.storage.get('id').then((val) => {
+/*     this.storage.get('id').then((val) => {
       console.log(val);
       if(val!=null)
-      this.rootPage = HomePage;
-    });
+      this.rootPage = 'HomePage';
+    }); */
+
+
+    if(id!=undefined){
+      this.rootPage = 'HomePage';
+    }else{
+      this.rootPage = 'LoginPage';
+    }
+
     
   }
 
@@ -73,6 +75,11 @@ export class MyApp {
          });
       });
 
+      this.storage_det = this.storage.get('trip');
+      if(this.storage_det.length == '0'){
+        this.import_data();
+      }
+     
       
     
         this.events.subscribe('trip', (output,id) => {
@@ -265,8 +272,8 @@ export class MyApp {
   logout() {
     this.storage.remove('id');
     //this.storage.clear();
-    this.events.unsubscribe('id');
-    this.nav.setRoot(LoginPage);
+    //this.events.unsubscribe('id');
+    this.nav.setRoot('LoginPage');
   }
 
 }

@@ -13,6 +13,39 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-item>
+    <ion-label color="primary">First Name</ion-label>
+   <ion-input placeholder="First Name" clearInput [(ngModel)]="first_name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" fixed>Last Name</ion-label>
+    <ion-input type="text" placeholder="Last Name" [(ngModel)]="last_name" clearInput></ion-input>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label color="primary" fixed>Description</ion-label>
+    <ion-textarea placeholder="Description here" 
+    [(ngModel)]="description" name="note" autocomplete="on" autocorrect="on" clearInput></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" fixed>Location</ion-label>
+    <ion-input type="text" placeholder="Location" [(ngModel)]="location" clearInput></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" fixed>Industry</ion-label>
+    <ion-input type="text" placeholder="industry" [(ngModel)]="industry" clearInput></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" fixed>City</ion-label>
+    <ion-input type="text" placeholder="city" [(ngModel)]="city" clearInput></ion-input>
+  </ion-item>
+
+
 
 </ion-content>

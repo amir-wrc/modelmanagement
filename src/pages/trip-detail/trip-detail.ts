@@ -1,9 +1,8 @@
 import {Component} from "@angular/core";
-import {NavController,NavParams} from "ionic-angular";
+import {IonicPage,NavController,NavParams} from "ionic-angular";
 import {TripService} from "../../services/trip-service";
-import {CheckoutTripPage} from "../checkout-trip/checkout-trip";
 import {Storage} from '@ionic/storage';
-
+@IonicPage()
 @Component({
   selector: 'page-trip-detail',
   templateUrl: 'trip-detail.html'
@@ -54,6 +53,6 @@ export class TripDetailPage {
 
   // go to checkout page
   checkout() {
-    this.nav.push(CheckoutTripPage);
+    this.nav.push('CheckoutTripPage');
   }
 }

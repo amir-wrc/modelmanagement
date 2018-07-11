@@ -1,10 +1,8 @@
 import {Component} from "@angular/core";
-import {NavController, AlertController, ToastController, MenuController,Events } from "ionic-angular";
-import {HomePage} from "../home/home";
+import {IonicPage,NavController, AlertController, ToastController, MenuController,Events } from "ionic-angular";
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-import {RegisterPage} from "../register/register";
 import {Storage} from '@ionic/storage';
-
+@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -21,7 +19,7 @@ export class LoginPage {
 
   // go to register page
   register() {
-    this.nav.setRoot(RegisterPage);
+    this.nav.setRoot('RegisterPage');
   }
 
   // login and go to home page
@@ -56,7 +54,7 @@ export class LoginPage {
       } else{
         this.storage.set('id',yahooOnly[0]['id']);
         this.events.publish('trip',jsondata,yahooOnly[0]['id']);
-        this.nav.setRoot(HomePage);
+        this.nav.setRoot('HomePage');
       }
       
     });

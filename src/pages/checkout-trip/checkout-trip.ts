@@ -1,8 +1,7 @@
 import {Component} from "@angular/core";
-import {NavController, LoadingController, ToastController} from "ionic-angular";
+import {IonicPage,NavController, LoadingController, ToastController} from "ionic-angular";
 import {TripService} from "../../services/trip-service";
-import {HomePage} from "../home/home";
-
+@IonicPage()
 @Component({
   selector: 'page-checkout-trip',
   templateUrl: 'checkout-trip.html'
@@ -43,7 +42,7 @@ export class CheckoutTripPage {
       loader.dismiss();
       toast.present();
       // back to home page
-      this.nav.setRoot(HomePage);
+      this.nav.setRoot('HomePage');
     }, 3000)
   }
 }

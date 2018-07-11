@@ -1,13 +1,9 @@
 import {Component} from "@angular/core";
-import {NavController, PopoverController} from "ionic-angular";
+import {IonicPage,NavController, PopoverController} from "ionic-angular";
 import {Storage} from '@ionic/storage';
 
-import {NotificationsPage} from "../notifications/notifications";
-import {SettingsPage} from "../settings/settings";
-import {TripsPage} from "../trips/trips";
-import {SearchLocationPage} from "../search-location/search-location";
 
-
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -54,22 +50,22 @@ export class HomePage {
       //filterBy.industry = [this.mem];
     }
     filterBy = JSON.stringify(filterBy);
-    this.nav.push(TripsPage,{filterBy:filterBy});
+    this.nav.push('TripsPage',{filterBy:filterBy});
   }
 
   // choose place
   choosePlace(from) {
-    this.nav.push(SearchLocationPage, from);
+    this.nav.push('SearchLocationPage', from);
   }
 
   // to go account page
   goToAccount() {
-    this.nav.push(SettingsPage);
+    this.nav.push('SettingsPage');
   }
 
   presentNotifications(myEvent) {
     console.log(myEvent);
-    let popover = this.popoverCtrl.create(NotificationsPage);
+    let popover = this.popoverCtrl.create('NotificationsPage');
     popover.present({
       ev: myEvent
     });

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage,NavController } from 'ionic-angular';
 import { WeatherProvider } from '../../services/weather';
 import { Storage } from '@ionic/storage';
 // import { HttpErrorResponse } from '@angular/common/http';
-
+@IonicPage()
 @Component({
   selector: 'page-local-weather',
   templateUrl: 'local-weather.html'

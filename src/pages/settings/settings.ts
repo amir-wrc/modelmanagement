@@ -1,8 +1,7 @@
 import {Component} from "@angular/core";
-import {NavController} from "ionic-angular";
-import {LoginPage} from "../login/login";
+import {NavController,IonicPage} from "ionic-angular";
 import {Storage} from '@ionic/storage';
-
+@IonicPage()
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html'
@@ -15,6 +14,6 @@ export class SettingsPage {
   // logout
   logout() {
     this.storage.remove('id');
-    this.nav.setRoot(LoginPage);
+    this.nav.setRoot('LoginPage');
   }
 }

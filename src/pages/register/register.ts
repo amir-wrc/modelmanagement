@@ -1,10 +1,8 @@
 import { Storage } from '@ionic/storage';
 import {Component} from "@angular/core";
-import {NavController,Events } from "ionic-angular";
-import {LoginPage} from "../login/login";
-import {HomePage} from "../home/home";
+import {IonicPage,NavController,Events } from "ionic-angular";
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-
+@IonicPage()
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html'
@@ -69,7 +67,7 @@ export class RegisterPage {
       //console.log(new_register);
       this.storage.set('trip',JSON.stringify(new_register));
       this.events.publish('trip', JSON.stringify(new_register),jdata.id);
-      this.nav.setRoot(HomePage);
+      this.nav.setRoot('HomePage');
     });
     
     
@@ -78,6 +76,6 @@ export class RegisterPage {
 
   // go to login page
   login() {
-    this.nav.setRoot(LoginPage);
+    this.nav.setRoot('LoginPage');
   }
 }
