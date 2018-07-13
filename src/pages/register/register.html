@@ -1,82 +1,49 @@
-<!-- -->
-<ion-content class="animated fadeIn login auth-page-register">
-  <div class="login-content">
-
-    <!-- Logo -->
-    <div  text-center>
-      <div class="logo"></div>
-      <h2 ion-text class="text-primary">
-        <strong>Model Management</strong>
-      </h2>
+<ion-content class="mm-signup">
+    <div class="logo" text-center>
+      <img src="assets/imgs/logo.png" alt="">
     </div>
-
-    <!-- Login form -->
-    <form class="list-form" [formGroup]="todo" (ngSubmit)="register()">
-      <ion-item>
-        <ion-label floating>
-          <ion-icon name="person" item-start class="text-primary"></ion-icon>
-          First Name
-        </ion-label>
-        <ion-input type="text"  formControlName="fname"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>
-          <ion-icon name="person" item-start class="text-primary" ></ion-icon>
-          Last Name
-        </ion-label>
-        <ion-input type="text" formControlName="lname"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>
-          <ion-icon name="mail" item-start class="text-primary" ></ion-icon>
-          Email
-        </ion-label>
-        <ion-input type="email" formControlName="email"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>
-          <ion-icon name="lock" item-start class="text-primary" ></ion-icon>
-          Password
-        </ion-label>
-        <ion-input type="password" formControlName="pass"></ion-input>
-      </ion-item>
-   
-
-    <div margin-top>
-      <button ion-button block color="dark" tappable type="submit" class="back-bg">
-        SIGN UP
-      </button>
-
-      <!-- <p text-center ion-text color="secondary">Or Sign Up with:</p>
-
-      <ion-grid>
+    <div class="form-area">
+      <div class="form-area-container">
+          <form class="list-form" [formGroup]="todo" (ngSubmit)="register()">
+        <ion-item [ngClass]="((todo.get('first_name').hasError('required') && todo.get('first_name').touched)?'error':'')">
+          <ion-label>
+            <ion-icon name="ios-person-outline" item-start></ion-icon>
+          </ion-label>
+          <ion-input type="text" formControlName="first_name" placeholder="First Name"></ion-input>
+        </ion-item>
+        <ion-item [ngClass]="((todo.get('last_name').hasError('required') && todo.get('last_name').touched)?'error':'')">
+            <ion-label>
+              <ion-icon name="ios-person-outline" item-start></ion-icon>
+            </ion-label>
+            <ion-input type="text" formControlName="last_name" placeholder="Last Name"></ion-input>
+          </ion-item>
+        <ion-item [ngClass]="((todo.get('email').hasError('email') && todo.get('email').touched)?'error':'')">
+          <ion-label>
+            <ion-icon name="ios-mail-outline" item-start></ion-icon>
+          </ion-label>
+          <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+        </ion-item>
+        <ion-item [ngClass]="((todo.get('password').hasError('required') && todo.get('password').touched)?'error':'')">
+          <ion-label>
+            <ion-icon name="ios-key-outline" item-start></ion-icon>
+          </ion-label>
+          <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+        </ion-item>
+        <button ion-button color="primary" block round tappable >Sign Up</button>
+        </form>
+      </div>
+      <div class="bottom-link">
         <ion-row>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-facebook">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </button>
+          <ion-col col-9>
+            <p>
+              Already have an account?
+            </p>
           </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-twitter">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-gplus">
-              <ion-icon name="logo-googleplus"></ion-icon>
-            </button>
+          <ion-col col-3 text-right>
+            <a href="#" (click)="redirectSignIn()">Sign In</a>
           </ion-col>
         </ion-row>
-      </ion-grid> -->
+      </div>
     </div>
-  </form>
-    <!-- Other links -->
-    <div text-center margin-top>
-      <span ion-text color="primary" class="pink-bg" tappable (click)="login()">I have an account</span>
-    </div>
-
-  </div>
-</ion-content>
+  </ion-content>
+  

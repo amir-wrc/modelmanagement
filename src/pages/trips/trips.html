@@ -1,9 +1,17 @@
 <!-- -->
 <ion-header>
-  <ion-navbar color="primary">
+  <!-- <ion-navbar color="primary">
     <ion-title>
       <span ion-text>Model List</span>
     </ion-title>
+  </ion-navbar> -->
+  <ion-navbar>
+    <ion-input type="text" placeholder="Search Model"></ion-input>
+	<ion-buttons end>
+      <button ion-button icon-only (click)="filter()">
+        <ion-icon name="ios-funnel"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
   <!--  -->

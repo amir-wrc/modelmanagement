@@ -1,72 +1,41 @@
-<!-- -->
-<ion-content padding class="animated fadeIn login auth-page">
-  <div class="login-content">
-
-    <!-- Logo -->
-    <div padding-horizontal text-center class="animated fadeInDown">
-      <div class="logo"></div>
-      <h2 ion-text class="text-primary">
-        <strong>Model Management</strong>
-      </h2>
+<ion-content class="mm-signin">
+  <div class="logo" text-center>
+    <img src="assets/imgs/logo.png" alt="">
+  </div>
+  <div class="form-area">
+     
+    <div class="form-area-container">
+        <form class="list-form" [formGroup]="todo" (ngSubmit)="login()">
+      <ion-item [ngClass]="((todo.get('email').hasError('email') && todo.get('email').touched)?'error':'')">
+        <ion-label>
+          <ion-icon name="ios-mail-outline" item-start></ion-icon>
+        </ion-label>
+        <ion-input type="email" formControlName="email" placeholder="Email"></ion-input>
+      </ion-item>
+      <ion-item [ngClass]="((todo.get('pass').hasError('required') && todo.get('pass').touched)?'error':'')">
+        <ion-label>
+          <ion-icon name="ios-key-outline" item-start></ion-icon>
+        </ion-label>
+        <ion-input type="password" formControlName="pass" placeholder="Password"></ion-input>
+      </ion-item>
+      <button ion-button color="primary" block round tappable>Sign In</button>
+    </form>
+      <div class="forgot-link" text-right>
+        <a href="#" >Forgot password?</a>
+      </div>
     </div>
-
-    <!-- Login form -->
-    <form class="list-form" [formGroup]="todo" (ngSubmit)="login()">
-      <ion-item>
-        <ion-label floating>
-          <ion-icon name="mail" item-start class="text-primary" ></ion-icon>
-          Email
-        </ion-label>
-        <ion-input type="email" formControlName="email" ></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>
-          <ion-icon name="lock" item-start class="text-primary" ></ion-icon>
-          Password
-        </ion-label>
-        <ion-input type="password" formControlName="pass"></ion-input>
-      </ion-item>
+    <div class="bottom-link">
+      <ion-row>
+        <ion-col col-9>
+          <p>
+            Don't have an account?
+          </p>
+        </ion-col>
+        <ion-col col-3 text-right>
+          <a (click)="redirectSignUp()">Sign Up</a>
+        </ion-col>
+      </ion-row>
+    </div>
     
-
-    <p text-right ion-text class="text-primary" tappable (click)="forgotPass()"><strong>Forgot Password?</strong></p>
-
-    <div>
-      <button ion-button icon-start block color="dark" class="back-bg" tappable type="submit">
-        <ion-icon name="log-in"></ion-icon>
-        SIGN IN
-      </button>
- 
-      <p text-center ion-text color="secondary" class="pink-bg">Or Sign in with:</p>
-
-      <!-- <ion-grid>
-        <ion-row>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-facebook">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-twitter">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-gplus">
-              <ion-icon name="logo-googleplus"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-grid> -->
-
-    </div>
-  </form>
-
-
-    <!-- Other links -->
-    <div text-center margin-top >
-      <span ion-text color="secondary" tappable (click)="register()" class="pink-bg">New here? <strong>Sign up</strong></span>
-    </div>
-
   </div>
 </ion-content>

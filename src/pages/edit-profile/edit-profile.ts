@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'edit-profile.html',
 })
 export class EditProfilePage {
-
+  mem:any = '6';
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

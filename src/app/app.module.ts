@@ -11,6 +11,7 @@ import {TripService} from "../services/trip-service";
 import {WeatherProvider} from "../services/weather";
 import {MyApp} from "./app.component";
 import { Http,HttpModule, Headers, RequestOptions } from '@angular/http';
+import { BaseurlProvider } from '../providers/baseurl/baseurl';
 
 // import services
 // end import services
@@ -47,7 +48,8 @@ import { Http,HttpModule, Headers, RequestOptions } from '@angular/http';
     Keyboard,
     ActivityService,
     TripService,
-    WeatherProvider
+    WeatherProvider,
+    BaseurlProvider
   ]
 })
 

@@ -1,6 +1,10 @@
-import {Component} from "@angular/core";
-import {IonicPage,NavController, PopoverController} from "ionic-angular";
-import {Storage} from '@ionic/storage';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, PopoverController,Events } from "ionic-angular";
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import { BaseurlProvider } from '../../providers/baseurl/baseurl';
+//import {Storage} from '@ionic/storage';
 
 
 @IonicPage()
@@ -11,66 +15,48 @@ import {Storage} from '@ionic/storage';
 
 export class HomePage {
   // search condition
-  keywords:any="";
-  city:any="";
-  public search = {
-    name: "Rio de Janeiro, Brazil",
-    date: new Date().toISOString()
+  keywords: any = "";
+  city: any = "";
+  token: any = localStorage.getItem('token');
+  constructor(public nav: NavController, public http: Http, public popoverCtrl: PopoverController, public service: BaseurlProvider,public events:Events) {
+    this.profiles();
   }
 
-  mem:any = "6";
+  profiles() {
+    let headers = new Headers();
+    //headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', this.token);
+    this.http.get(this.service.base_url + 'profile', {headers: headers})
+      .subscribe(res => {
+        if(res.json().code == '200'){
+          this.events.publish('user_data',JSON.stringify(res.json()));
+        }
+        
+        console.log(res);
+      }, (err) => {
+        console.log(err);
+      });
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    // headers.append('Accept', 'application/json');
+    // headers.append('Authorization', this.token);
+    // // headers.append('Content-Type', 'application/json');
+    // let options = new RequestOptions({ headers: headers });
+    // let data = "";
+    // //alert(this.service.base_url);
+    // this.http.post(this.service.base_url + 'profile', data, options).map(response => {
+    //   alert();
+    //   let data = response.json();
+    //   console.log(data);
 
-  constructor(private storage: Storage, public nav: NavController, public popoverCtrl: PopoverController) {
+    // });
   }
 
   ionViewWillEnter() {
-    // this.search.pickup = "Rio de Janeiro, Brazil";
-    // this.search.dropOff = "Same as pickup";
-    this.storage.get('pickup').then((val) => {
-      if (val === null) {
-        this.search.name = "Rio de Janeiro, Brazil"
-      } else {
-        this.search.name = val;
-      }
-    }).catch((err) => {
-      console.log(err)
-    });
-  }
 
-  // go to result page
-  doSearch() {
-    let filterBy:any={};
-    if(this.keywords!=''){
-      filterBy.fname = [this.keywords.toLowerCase()];
-    }
-    if(this.city!=''){
-      filterBy.city = [this.city.toLowerCase()];
-    }
-    if(this.mem!=''){
-      //filterBy.industry = [this.mem];
-    }
-    filterBy = JSON.stringify(filterBy);
-    this.nav.push('TripsPage',{filterBy:filterBy});
-  }
 
-  // choose place
-  choosePlace(from) {
-    this.nav.push('SearchLocationPage', from);
-  }
 
-  // to go account page
-  goToAccount() {
-    this.nav.push('SettingsPage');
-  }
-
-  presentNotifications(myEvent) {
-    console.log(myEvent);
-    let popover = this.popoverCtrl.create('NotificationsPage');
-    popover.present({
-      ev: myEvent
-    });
   }
 
 }
-
-//

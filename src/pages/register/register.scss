@@ -1,4 +1,129 @@
-page-register,
-.register {
-
+page-register {
+    .mm-signup {
+        .scroll-content {
+          background: #2e2c7a;
+          background: -moz-linear-gradient(-45deg, #2e2c7a 0%, #249aac 100%);
+          background: -webkit-linear-gradient(-45deg, #2e2c7a 0%, #249aac 100%);
+          background: linear-gradient(135deg, #2e2c7a 0%, #249aac 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2e2c7a', endColorstr='#249aac', GradientType=1);
+          font-family: 'Poppins', sans-serif;
+          padding: 0 28px;
+          overflow-y: hidden;
+          .logo {
+            margin: 20px 0 0 0;
+            img {
+              height: 79px;
+              width: 80px;
+            }
+          }
+          .form-area {
+            .form-area-container {
+                margin: 30px 0;
+            }
+            .item {
+              background: transparent;
+              border: 1px solid #fff;
+              -webkit-border-radius: 50px;
+              -moz-border-radius: 50px;
+              -ms-border-radius: 50px;
+              -o-border-radius: 50px;
+              border-radius: 50px;
+              color: #fff;
+              height: 50px;
+              margin-bottom: 30px;
+              .item-inner {
+                border-bottom: 0;
+                .ion-ios-key-outline {
+                    -webkit-transform: rotate(270deg);
+                    -moz-transform: rotate(270deg);
+                    -ms-transform: rotate(270deg);
+                    -o-transform: rotate(270deg);
+                    transform: rotate(270deg);
+                    //overflow: hidden;
+                }
+                .icon {
+                  font-size: 30px;
+                  color: #fff;
+                }
+                .text-input {
+                  font-size: 16px;
+                  &::-webkit-input-placeholder {
+                    color: #fff;
+                  }
+                  &::-moz-placeholder {
+                    color: #fff;
+                  }
+                  &:-ms-input-placeholder {
+                    color: #fff;
+                  }
+                  &:-moz-placeholder {
+                    color: #fff;
+                  }
+                }
+              }
+              &.error {
+                border: 1px solid #ff0000;
+                .icon {
+                  color: #ff0000;
+                }
+                .text-input {
+                  color: #ff0000;
+                  &::-webkit-input-placeholder {
+                    color: #ff0000;
+                  }
+                  &::-moz-placeholder {
+                    color: #ff0000;
+                  }
+                  &:-ms-input-placeholder {
+                    color: #ff0000;
+                  }
+                  &:-moz-placeholder {
+                    color: #ff0000;
+                  }
+                }
+              }
+            }
+            .button {
+              color: #2d2d7b;
+              background-color: #fff;
+              height: 50px;
+              border-radius: 50px;
+              text-transform: uppercase;
+              padding: 0;
+              font-size: 18px;
+              margin: 0;
+              -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+              -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+              -ms-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+              -o-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+              box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+            }
+            .forgot-link {
+              margin-top: 30px;
+              a {
+                color: #fff;
+                font-size: 16px;
+                text-decoration: none;
+                font-weight: 300;
+              }
+            }
+            .bottom-link {
+                text-transform: uppercase;
+              p {
+                font-size: 14px;
+                color: #fff;
+                margin: 0;
+                font-weight: 300;
+              }
+              a {
+                text-decoration: none;
+                font-size: 14px;
+                color: #fff;
+                margin: 0;
+                font-weight: 300;
+              }
+            }
+          }
+        }
+      }
 }

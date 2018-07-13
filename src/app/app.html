@@ -6,12 +6,13 @@
         <ion-row>
           <ion-col col-4>
               <div class="user-avatar">
-                <img src="../assets/img/avatar.jpg">
+                <img *ngIf="alldata.avatar==''" src="../assets/img/avatar.jpg">
+                <img *ngIf="alldata.avatar!=''" [src]="alldata.avatar" >
               </div>
           </ion-col>
           <ion-col padding-top col-8>
             <h2 ion-text class="no-margin bold text-white">
-              {{alldata.fname}} {{alldata.lname}}
+              {{alldata.first_name}} {{alldata.last_name}}
             </h2>
             <!-- <span ion-text color="light">Customer</span> -->
           </ion-col>

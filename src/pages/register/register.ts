@@ -1,7 +1,12 @@
 import { Storage } from '@ionic/storage';
 import {Component} from "@angular/core";
-import {IonicPage,NavController,Events } from "ionic-angular";
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import {IonicPage,NavController,Events,ToastController } from "ionic-angular";
+import {Validators, FormBuilder, FormGroup,FormControl } from '@angular/forms';
+import {LoginPage} from '../login/login';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import { BaseurlProvider } from '../../providers/baseurl/baseurl';
 @IonicPage()
 @Component({
   selector: 'page-register',
@@ -9,67 +14,83 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class RegisterPage {
   private todo : FormGroup;
-  constructor(public nav: NavController,private formBuilder: FormBuilder,public storage:Storage,public events:Events ) {
+  
+  constructor(public nav: NavController,private formBuilder: FormBuilder,public storage:Storage,public events:Events, public http: Http,public service: BaseurlProvider,public toastCtrl: ToastController ) {
     this.todo = this.formBuilder.group({
-      fname:[''],
-      lname:[''],
-      email: [''],
-      pass: ['']
+      first_name:['',Validators.required],
+      last_name:['',Validators.required],
+      email: ['',Validators.compose([Validators.required,Validators.email])],
+      password: ['',Validators.required]
     });
   }
 
+  validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      console.log(field);
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
+}
+
+isFieldValid(field: string) {
+  return !this.todo.get(field).valid && this.todo.get(field).touched;
+}
+
+displayFieldCss(field: string) {
+  return {
+    'has-error': this.isFieldValid(field),
+    'has-feedback': this.isFieldValid(field)
+  };
+}
+
+  redirectSignIn(){
+    this.nav.setRoot('LoginPage');
+  }
   // register and go to home page
   register() {
+    if (this.todo.valid) {
     let new_register:any=[];
-    let jdata:any = {
-          "fname": "",
-          "lname":"",
-          "email":"",
-          "pass":"",
-          "sub_name": "Videos",
-          "thumb": "",
-          "description": "",
-          "location": "",
-          "industry":"0",
-          "city":"",
-          "videos":"",
-          "images": [],
-          "trust":[],
-          "info": [],
-          "discipline": []
-        }
-    let email = this.todo.value.email;
-    let pass = this.todo.value.pass;
-    let fname = this.todo.value.fname;
-    let lname = this.todo.value.lname;
-    if(fname!=''){
-      jdata.fname = fname;
-    }
-    if(lname!=''){
-      jdata.lname = lname;
-    }
-    if(email!=''){
-      jdata.email = email;
-    }
-    if(pass!=''){
-      jdata.pass = pass;
-    }
-    this.storage.get('trip').then((jsondata) => {
-      
-      jdata.id = parseInt(JSON.parse(jsondata).length)+1;
-     // console.log(jdata.id);
-      
-      //this.events.publish('id', jdata.id);
-      this.storage.set('id',jdata.id);
-
-      new_register = JSON.parse(jsondata); 
-      new_register.push(jdata);
-      //console.log(new_register);
-      this.storage.set('trip',JSON.stringify(new_register));
-      this.events.publish('trip', JSON.stringify(new_register),jdata.id);
-      this.nav.setRoot('HomePage');
-    });
     
+    let email = this.todo.value.email;
+    let pass = this.todo.value.password;
+    let fname = this.todo.value.first_name;
+    let lname = this.todo.value.last_name;
+    
+    let data = "first_name="+fname+"&last_name="+lname+"&email="+email+"&password="+pass;
+    let headers = new Headers();
+    //headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    //headers.append('Authorization', this.token);
+    this.http.post(this.service.base_url + 'signup',data, {headers: headers})
+      .subscribe(res => {
+        if(res.json().code == '200'){
+          localStorage.setItem("token", res.json().token);
+          this.nav.setRoot('HomePage');
+        }else{
+          let toast = this.toastCtrl.create({
+            message: res.json().message,
+            duration: 3000,
+            position: 'top'
+            });
+
+            toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+            });
+
+            toast.present();
+        }
+        
+        console.log(res);
+      }, (err) => {
+        console.log(err);
+      });
+    }else {
+      this.validateAllFormFields(this.todo); //{7}
+    }
     
     
   }
